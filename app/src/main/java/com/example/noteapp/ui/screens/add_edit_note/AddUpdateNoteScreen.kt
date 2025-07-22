@@ -12,17 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.noteapp.model.Note
 import com.example.noteapp.ui.components.NoteTextField
 import com.example.noteapp.ui.theme.colorBlack
-import com.example.noteapp.ui.theme.colorGrey
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
-fun AddEditNoteScreen() {
+fun AddEditNoteScreen(
+    navController: NavController,
+    note: Note?,
+) {
     val titleState = remember { mutableStateOf("") }
     val titleErrorState = remember { mutableStateOf<String?>(null) }
 
@@ -62,7 +64,8 @@ fun AddEditNoteScreen() {
                     descriptionErrorState.value =
                         if (descriptionState.value.isBlank()) "Description cannot be empty" else null
 
-                    val isValid = titleErrorState.value == null && descriptionErrorState.value == null
+                    val isValid =
+                        titleErrorState.value == null && descriptionErrorState.value == null
                     if (isValid) {
                         // Save note logic
                     }
