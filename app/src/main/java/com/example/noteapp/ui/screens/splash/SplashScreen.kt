@@ -15,7 +15,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.noteapp.R
-import com.example.noteapp.ui.navigation.Routes
 import com.example.noteapp.ui.theme.colorBlack
 import kotlinx.coroutines.delay
 
@@ -26,10 +25,10 @@ fun SplashScreen(
 ) {
     LaunchedEffect(Unit) {
         delay(2000)
-        navController.navigate(Routes.HOME) {
-            popUpTo(Routes.SPLASH) {
-                inclusive = true
-            }
+        navController.navigate(Screen.Home.route) {
+//            popUpTo(Screen.Splash.route) {
+//                inclusive = true
+//            }
         }
     }
     Scaffold { innerPadding ->

@@ -4,11 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
+import androidx.core.view.WindowCompat
 import com.example.noteapp.ui.navigation.AppNavGraph
 import com.example.noteapp.ui.theme.NoteAppTheme
 
@@ -16,15 +12,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Allow content to draw behind system bars
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // Use WindowInsetsControllerCompat to customize system bar appearance
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.isAppearanceLightStatusBars = true
+
         setContent {
             NoteAppTheme {
-                val navController = rememberNavController()
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavGraph(
-                        navController = navController,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppNavGraph()
             }
         }
     }

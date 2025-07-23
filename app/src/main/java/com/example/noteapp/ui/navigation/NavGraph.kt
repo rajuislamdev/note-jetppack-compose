@@ -1,37 +1,42 @@
 package com.example.noteapp.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.noteapp.model.Note
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.noteapp.ui.screens.add_edit_note.AddEditNoteScreen
 import com.example.noteapp.ui.screens.home.HomeScreen
 import com.example.noteapp.ui.screens.splash.SplashScreen
 
 @Composable
-fun AppNavGraph(navController: NavHostController, modifier: Modifier) {
+fun AppNavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(
-        navController = navController,
-        startDestination = Routes.SPLASH,
-        modifier = modifier
+        navController = navController, startDestination = Screen.Splash.route,
     ) {
         composable(Routes.SPLASH) {
             SplashScreen(
                 navController = navController
             )
         }
-        composable(Routes.HOME) {
+        composable(Screen.Home.route) {
             HomeScreen(
                 navController = navController
             )
         }
-        composable(Routes.ADD_EDIT_NOTE) {
-            val note = navController.previousBackStackEntry?.savedStateHandle?.get<Note?>("note")
+        composable(
+            route = Screen.AddEditNote.route,
+            arguments = listOf(navArgument("noteId") {
+                type = NavType.StringType
+                nullable = true
+            })
+        ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull()
             AddEditNoteScreen(
                 navController = navController,
-                note = note
+                note = null
             )
         }
 

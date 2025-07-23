@@ -1,9 +1,15 @@
-import com.example.noteapp.model.Note
+import com.example.noteapp.ui.navigation.Routes
 
 sealed class Screen(val route: String) {
-    object Splash : Screen("splash")
-    object Home : Screen("home")
-    object AddEditNote : Screen("add_edit_note?noteId={noteId}") {
-        fun note(note: Note?) = "add_edit_note?note=$note"
+    object Splash : Screen(Routes.SPLASH)
+    object Home : Screen(Routes.HOME)
+    object AddEditNote : Screen("${Routes.ADD_EDIT_NOTE}?noteId={noteId}") {
+        fun createRoute(noteId: Int?): String {
+            return if (noteId != null) {
+                "${Routes.ADD_EDIT_NOTE}?noteId=$noteId"
+            } else {
+                Routes.ADD_EDIT_NOTE
+            }
+        }
     }
 }
