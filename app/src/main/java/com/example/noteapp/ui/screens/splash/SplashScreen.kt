@@ -26,9 +26,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         delay(2000)
         navController.navigate(Screen.Home.route) {
-//            popUpTo(Screen.Splash.route) {
-//                inclusive = true
-//            }
+            popUpTo(Screen.Splash.route)
         }
     }
     Scaffold { innerPadding ->

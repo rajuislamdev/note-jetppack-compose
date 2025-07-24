@@ -11,10 +11,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,11 +31,30 @@ import com.example.noteapp.ui.theme.colorGrey
 import com.example.noteapp.ui.theme.colorLightGray
 import com.example.noteapp.ui.theme.colorRed
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
 ) {
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Create Notes \nCrud",
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 26.sp,
+                            fontWeight = FontWeight.W600
+                        )
+                    )
+
+                },
+
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = colorBlack)
+            )
+
+        },
         floatingActionButton = {
             FloatingActionButton(
                 containerColor = colorRed,
@@ -58,15 +80,15 @@ fun HomeScreen(
             Column(
                 modifier = Modifier.padding(all = 20.dp)
             ) {
-                Text(
-                    text = "Create Notes\nCrud",
-                    style = TextStyle(
-                        fontSize = 32.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    ),
-                )
-                Spacer(modifier = Modifier.padding(vertical = 5.dp))
+//                Text(
+//                    text = "Create Notes\nCrud",
+//                    style = TextStyle(
+//                        fontSize = 32.sp,
+//                        color = Color.White,
+//                        fontWeight = FontWeight.Bold
+//                    ),
+//                )
+//                Spacer(modifier = Modifier.padding(vertical = 5.dp))
                 LazyColumn {
                     items(10) { index ->
                         ItemCard(index)
